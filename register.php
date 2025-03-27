@@ -47,7 +47,7 @@
             $now = new DateTime();
             $age = $now->diff($birthDate)->y;
             if ($age < 18) {
-                $errors['birthday'] = 'Вам должно быть 18 лет и старше!';
+                $errors['birthday'] = 'Вам должно быть больше 18 лет!';
             }
         }
 
@@ -75,26 +75,56 @@
             }
         }
 
-        foreach ($errors as $field => $error) {
-            echo "<p style='color:red'>$error</p>";
-        }
+
     } ?>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Войти</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="body">
+		<?php if (!empty($errors)): 
+            foreach ($errors as $field => $error) {
+                echo "<div class='error-message'>$error</div>";
+            }?>
+            
+        <?php endif; ?>
+		<?php if (!isset($_SESSION['auth'])):?>
+		<h2 class="register-title">Зарегестрироваться</h2>
+		<form action="" method="post" class="login-form">
+			<label for="login">Логин</label>
+			<input type="text" name="login" id="login" value="<?= isset($_POST['login']) ? htmlspecialchars($_POST['login'], ENT_QUOTES, 'UTF-8') : '' ?>" required>
 
-<form action="" method="post">
-    <label for="login">login</label>
-    <input type="text" name="login" id="login" value="<?= !empty($_POST['login']) ? $_POST['login'] : ''?>" required><br>
+            <label for="email">E-mail</label>
+            <input type="email" name="email" value="<?= !empty($_POST['email']) ? $_POST['email'] : ''?>" required>
+	
+			<label for="password">Пароль</label>
+			<input type="password" name="password" id="password" required>
 
-    <label for="email">e-mail</label>
-    <input type="email" name="email" value="<?= !empty($_POST['email']) ? $_POST['email'] : ''?>" required><br>
+            <label for="confirm">Подтверждение пароля</label>
+            <input type="password" name="confirm" required>
 
-    <label for="password">password</label>
-    <input type="password" name="password" required><br>
+            <label for="birthday">Дата</label>
+            <input type="date" name="birthday" value="<?= !empty($_POST['birthday']) ? $_POST['birthday'] : ''?>" required>
 
-    <label for="confirm">confirm</label>
-    <input type="password" name="confirm" required><br>
-
-    <label for="birthday">your birthday</label>
-    <input type="date" name="birthday" value="<?= !empty($_POST['birthday']) ? $_POST['birthday'] : ''?>" required>
-    <button type="submit">Register</button>
-</form>
+			<button type="submit" class="button">Зарегестрироваться</button>
+		</form>
+		
+		<div class="separator"></div>
+	
+		<div class="register-link">
+			<p>Уже есть учетная запись?</p>
+		</div>
+		<div class="register-link" style="margin-top: 10px;">
+			<a href="register.php">Войти</a>
+		</div>		
+	</div>
+	<?php endif; ?>
+</body>
+</html>
 

@@ -230,6 +230,12 @@ header {
     margin-bottom: 20px;
 }
 
+.register-title {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
 .login-form {
     display: flex;
     flex-direction: column;
@@ -245,7 +251,7 @@ header {
 }
 
 .login-form input {
-    padding: 15px;
+    padding: 13px;
     border: 1px solid #ccc;
     border-radius: 15px;
     margin-bottom: 15px;
