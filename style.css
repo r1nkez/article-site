@@ -1,0 +1,338 @@
+/* ОБЩИЕ СТИЛИ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Шапка */
+header {
+    width: 100%;
+    height: 70px;
+    background-color: #364A75;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Контейнер навигации */
+.nav-container {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+/* Логотип */
+.logo {
+    font-size: 22px;
+    font-family: 'Segoe UI';
+    font-weight: 500;
+}
+
+/* Меню */
+.top-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+.top-menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'Segoe UI';
+    font-weight: 500;
+}
+
+/* Кнопка Войти */
+.login-button a {
+    background: white;
+    color: #364A75;
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'Segoe UI';
+    font-weight: 500;
+}
+
+.login-button a:hover {
+    background: #f0f0f0;
+}
+
+.admin-button a {
+    background: white;
+    color: #b52020;
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'Segoe UI';
+    font-weight: 500;
+}
+
+.admin-button a:hover {
+    background: #f35656;
+    color: #ffffff;
+}
+
+.user-buttons {
+    display: flex;
+    gap: 10px; 
+    align-items: center;
+}
+
+
+
+/* Центрирование блока статей */
+.articles {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+/* Заголовок секции */
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Сетка статей */
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr)); /* Ограничиваем 3 колонки */
+    gap: 20px;
+}
+
+/* Карточка статьи */
+.article-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    position: relative; /* Добавляем для правильного отображения */
+}
+
+.article-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.article-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Контент статьи */
+.article-info {
+    padding: 15px;
+}
+
+/* Метаданные статьи */
+.article-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* Заголовок статьи */
+.article-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Описание статьи */
+.article-description {
+    font-size: 14px;
+    color: #444;
+}
+
+.icon {
+    width: 30px;
+}
+
+.news {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+.section-title-news {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #E0E0E0;
+    padding-bottom: 5px;
+}
+
+.section-title-news .icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+/* Список новостей */
+.news-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.news-list li {
+    font-size: 16px;
+    color: #333;
+    padding: 5px 0;
+    border-bottom: 1px solid #E0E0E0;
+    transition: color 0.2s ease-in-out;
+}
+
+.news-list li:last-child {
+    border-bottom: none;
+}
+
+.news-list li:hover {
+    color: #007bff;
+    cursor: pointer;
+}
+
+
+.body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    margin: 0;
+}
+
+.login-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 350px;
+}
+
+.login-form label {
+    text-align: left;
+    font-size: 14px;
+    color: gray;
+    margin-bottom: 5px;
+}
+
+.login-form input {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    width: 100%;
+    outline: none;
+    transition: 0.3s;
+}
+
+.login-form input:focus {
+    border-color: #34487d;
+    box-shadow: 0 0 5px rgba(52, 72, 125, 0.3);
+}
+
+.button {
+    background-color: #34487d;
+    color: white;
+    font-size: 16px;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+    margin-bottom: 20px; 
+}
+
+.button:hover {
+    background-color: #2c3e6b;
+}
+
+.separator {
+    width: 100%;
+    max-width: 350px;
+    height: 1px;
+    background-color: #ccc;
+    margin: 10px 0 15px;
+}
+
+.register-link {
+    text-align: center;
+    font-size: 14px;
+    color: gray;
+}
+
+.register-link a {
+    color: #34487d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    background-color: #ffdddd;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.delete-btn {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 0; /* Убираем скругления */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.delete-btn:active {
+    background-color: #a71d2a;
+}
+
