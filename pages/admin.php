@@ -1,5 +1,7 @@
 <?php 
-    require 'connect.php';
+    $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
+    require $connect;
+
     if (!empty($_SESSION['auth'])) {
         $id = $_SESSION['id'];
         $query = "SELECT status FROM users WHERE id='$id'";
@@ -28,14 +30,14 @@
                     <td><?= $user['login']; ?></td>
                     <td><?= $user['status']; ?></td>
                     <td>
-                        <form action="changeStatus.php" method="post" onsubmit="return confirm('Вы уверены?');">
+                        <form action="/php/changeStatus.php" method="post" onsubmit="return confirm('Вы уверены?');">
                             <input type="hidden" name="id" value="<?= $user['id']?>">
                             <input type="hidden" name="status" value="<?= ($user['status'] === 'admin') ? 'user' : 'admin'?>">
                             <button type="submit"><?= ($user['status'] === 'admin') ? 'Сделать юзером' : 'Сделать админом'?></button>
                         </form>  
                     </td>
                     <td>
-                        <form action="deleteUser.php" method="post" onsubmit="return confirm('Вы уверены, что хотите удалить пользователя?');">
+                        <form action="/php/deleteUser.php" method="post" onsubmit="return confirm('Вы уверены, что хотите удалить пользователя?');">
                             <input type="hidden" name="id" value="<?= $user['id']?>">
                             <button type="submit" class="delete-btn">Delete</button>
                         </form>
@@ -45,8 +47,8 @@
             <?php endforeach; ?>
         </table>
     <?php else: 
-    header('Location: index.php');
+    header('Location: /index.php');
     die();
     endif;
     ?>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">

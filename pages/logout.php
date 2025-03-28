@@ -5,7 +5,7 @@
             unset($_SESSION['auth']);
             $_SESSION['flash'] = 'Вы успешно вышли из аккаунта!';
 
-            header("Location: index.php");
+            header("Location: /index.php");
             die();
         }
     }

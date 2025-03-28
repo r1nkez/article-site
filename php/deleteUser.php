@@ -1,5 +1,7 @@
 <?php
-    require 'connect.php';
+    $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
+    require $connect;
+    
     if (isset($_SESSION['auth'], $_SESSION['status']) && $_SESSION['auth'] && $_SESSION['status'] === 'admin') {
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
             if (isset($_POST['id'])) {
@@ -11,7 +13,7 @@
                 $query = "DELETE FROM users WHERE id='$id'";
                 mysqli_query($link, $query);
                 
-                header('Location: admin.php');
+                header('Location: ../pages/admin.php');
                 die();
             }
         }

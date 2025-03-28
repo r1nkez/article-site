@@ -1,12 +1,13 @@
 <?php
-    require 'connect.php';
+    $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
+    require $connect;
     ?>
 <!DOCTYPE html>
 <html lang="ru">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
         <title>Главная</title>
     </head>
     <body>
@@ -22,17 +23,17 @@
                 <div class="user-buttons">
                     <?php if (!empty($_SESSION['auth']) && !empty($_SESSION['status']) && $_SESSION['status'] === 'admin'): ?>
                         <div class="admin-button">
-                            <a href="admin.php">Админ панель</a>
+                            <a href="pages/admin.php">Админ панель</a>
                         </div>
                     <?php endif; ?>
                     <?php if (!empty($_SESSION['auth'])): ?>
                         <div class="login-button">
-                            <a href="account.php">Профиль</a>
+                            <a href="pages/account.php">Профиль</a>
                         </div>
                     <?php else: ?>
-                        <a href="register.php" style="color: white; text-decoration: none; font-size: 16px; font-family: 'Segoe UI'; font-weight: 500;">Зарегистрироваться</a>
+                        <a href="pages/register.php" style="color: white; text-decoration: none; font-size: 16px; font-family: 'Segoe UI'; font-weight: 500;">Зарегистрироваться</a>
                         <div class="login-button">
-                            <a href="login.php">Войти</a>
+                            <a href="pages/login.php">Войти</a>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -134,6 +135,3 @@
         
     </body>
 </html>
-
-    <a href="posts.php">Посты</a> 
-    <a href="account.php">Профиль</a>  

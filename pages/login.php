@@ -1,9 +1,11 @@
 <?php
 
-	require 'connect.php';
+	$connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
+	require $connect;
+
 	if (!empty($_SESSION['auth'])) {
 		$_SESSION['flash'] = 'Вы уже авторизованы';
-		header('Location: index.php');
+		header('Location: /index.php');
 		die();
 	}
 
@@ -27,7 +29,7 @@
 				$_SESSION['login'] = $login;
 				$_SESSION['status'] = $user['status'];
 				 
-				header('Location: index.php');
+				header('Location: /index.php');
 				die();
 			} else {
 				$error = 'Неправильный логин или пароль!';
@@ -42,7 +44,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Войти</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 	<div class="body">

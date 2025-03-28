@@ -1,5 +1,7 @@
 <?php 
-    require 'connect.php'; 
+    $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
+    require $connect;
+    
     if (!empty($_SESSION['id'])) {
 
     $id = $_SESSION['id'];
@@ -20,7 +22,7 @@
                 $query = "UPDATE users SET password='$newHash' WHERE id='$id'";
                 mysqli_query($link, $query);
                 $_SESSION['flash'] = 'Ваш пароль успешно изменен';
-                header('Location: index.php');
+                header('Location: /index.php');
                 die();
             } else {
                 echo 'Новый пароль и его подтверждение не совпадают!';

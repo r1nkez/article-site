@@ -1,6 +1,8 @@
 <?php
 
-    require 'login_pages.php';
+    $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
+    require $connect;
+    
     if (!empty($_SESSION['auth'])): ?>
         <!DOCTYPE html>
         <html lang="en">

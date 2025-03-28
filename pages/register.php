@@ -1,9 +1,10 @@
 <?php
-    require 'connect.php';
+    $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
+    require $connect;
 
     if (!empty($_SESSION['auth'])) {
 		$_SESSION['flash'] = 'Вы уже авторизованы';
-		header('Location: index.php');
+		header('Location: /index.php');
 		die();
 	}
     function clean_input($data) {
@@ -68,7 +69,7 @@
                 $_SESSION['id'] = $id;
                 $_SESSION['login'] = $login;
                 $_SESSION['status'] = 'user';
-                header('Location: index.php');
+                header('Location: /index.php');
                 die();
             } else {
                 $errors['login'] = 'Такой логин уже занят, придумайте другой!';
@@ -84,7 +85,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Войти</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 	<div class="body">
@@ -121,7 +122,7 @@
 			<p>Уже есть учетная запись?</p>
 		</div>
 		<div class="register-link" style="margin-top: 10px;">
-			<a href="register.php">Войти</a>
+			<a href="login.php">Войти</a>
 		</div>		
 	</div>
 	<?php endif; ?>

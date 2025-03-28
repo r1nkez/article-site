@@ -1,6 +1,8 @@
 <?php 
 
-    require 'connect.php';
+    $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
+    require $connect;
+    
     if (empty($_SESSION['auth'])) {
         http_response_code(401);
         die();

@@ -1,5 +1,6 @@
-<?php 
-    require 'connect.php';
+<?php
+    $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
+    require $connect;
 
     if (!empty($_SESSION['id'])) {
         $id = $_SESSION['id'];
@@ -27,6 +28,7 @@
             die();
         }
         ?>
+        <a href="/index.php">Главная</a><br><br><br>
         <form action="logout.php" method="post">
             <button type="submit" name="logout">Выйти из аккаунта</button>
         </form>
@@ -41,8 +43,8 @@
                 <button type="submit">Поставить имя</button>
             <?php endif; ?>
         </form>
-        <a href="changePassword.php">Сменить пароль</a>
-        <a href="deleteAccount.php">Удалить аккаунт</a>
+        <a href="php/changePassword.php">Сменить пароль</a>
+        <a href="php/deleteAccount.php">Удалить аккаунт</a>
             <?php else: http_response_code(401);
             endif;
     }   
