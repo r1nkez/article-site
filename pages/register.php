@@ -1,6 +1,8 @@
 <?php
     $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
     require $connect;
+    $head = $_SERVER['DOCUMENT_ROOT'] . '/templates/head.html';
+    require $head;
 
     if (!empty($_SESSION['auth'])) {
 		$_SESSION['flash'] = 'Вы уже авторизованы';
@@ -69,7 +71,7 @@
                 $_SESSION['id'] = $id;
                 $_SESSION['login'] = $login;
                 $_SESSION['status'] = 'user';
-                header('Location: /index.php');
+                header('Location: /pages/account.php');
                 die();
             } else {
                 $errors['login'] = 'Такой логин уже занят, придумайте другой!';
@@ -77,16 +79,9 @@
         }
 
 
-    } ?>
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Войти</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+    } 
+    ?>
+
 <body>
 	<div class="body">
 		<?php if (!empty($errors)): 

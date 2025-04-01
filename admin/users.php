@@ -1,6 +1,8 @@
 <?php 
     $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
     require $connect;
+    $head = $_SERVER['DOCUMENT_ROOT'] . '/templates/head.html';
+    require $head;
 
     if (!empty($_SESSION['auth'])) {
         $id = $_SESSION['id'];
@@ -16,6 +18,9 @@
         $res = mysqli_query($link, $query);
         for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
     ?>
+
+        <button href="/"></button>        
+
         <table border="1" style="text-align: center; margin: auto; width: 60%;">
             <tr>
                 <th>ID</th>
@@ -51,4 +56,3 @@
     die();
     endif;
     ?>
-    <link rel="stylesheet" href="/css/style.css">

@@ -1,59 +1,78 @@
 <?php
     $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
     require $connect;
+    $head = $_SERVER['DOCUMENT_ROOT'] . '/templates/head.html';
+    require $head;
     ?>
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/style.css">
-        <title>Главная</title>
-    </head>
+
     <body>
-        <header>
-            <nav class="nav-container">
-                <div class="logo">ЛОГО</div>
-                <ul class="top-menu">
-                    <li><a href="">Главная</a></li>
-                    <li><a href="#">Статьи</a></li>
-                    <li><a href="#">Новости</a></li>
-                    <li><a href="#">Контакты</a></li>
-                </ul>
-                <div class="user-buttons">
-                    <?php if (!empty($_SESSION['auth']) && !empty($_SESSION['status']) && $_SESSION['status'] === 'admin'): ?>
-                        <div class="admin-button">
-                            <a href="pages/admin.php">Админ панель</a>
-                        </div>
-                    <?php endif; ?>
-                    <?php if (!empty($_SESSION['auth'])): ?>
-                        <div class="login-button">
-                            <a href="pages/account.php">Профиль</a>
-                        </div>
-                    <?php else: ?>
-                        <a href="pages/register.php" style="color: white; text-decoration: none; font-size: 16px; font-family: 'Segoe UI'; font-weight: 500;">Зарегистрироваться</a>
-                        <div class="login-button">
-                            <a href="pages/login.php">Войти</a>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            </nav>
-        </header>
+        <?php
+            function timeAgo($date_from_db) {
+                $date = new DateTime($date_from_db);
+                $now = new DateTime();
+                $diff = $date->diff($now);
+            
+                if ($diff->y > 0) {
+                    return $diff->y . ' ' . getWord($diff->y, 'год', 'года', 'лет') . ' назад';
+                }
+                if ($diff->m > 0) {
+                    return $diff->m . ' ' . getWord($diff->m, 'месяц', 'месяца', 'месяцев') . ' назад';
+                }
+                if ($diff->d > 0) {
+                    return $diff->d . ' ' . getWord($diff->d, 'день', 'дня', 'дней') . ' назад';
+                }
+                if ($diff->h > 0) {
+                    return $diff->h . ' ' . getWord($diff->h, 'час', 'часа', 'часов') . ' назад';
+                }
+                if ($diff->i > 0) {
+                    return $diff->i . ' ' . getWord($diff->i, 'минута', 'минуты', 'минут') . ' назад';
+                }
+                return 'только что';
+            }
+            
+            function getWord($number, $form1, $form2, $form5) {
+                $n = abs($number) % 100;
+                if ($n >= 11 && $n <= 19) {
+                    return $form5;
+                }
+                $n = $n % 10;
+                if ($n == 1) {
+                    return $form1;
+                }
+                if ($n >= 2 && $n <= 4) {
+                    return $form2;
+                }
+                return $form5;
+            }
+            
+            $header = $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
+            require $header; 
+            
+            $query = "SELECT posts.id, posts.header, posts.text, posts.created_at, users.name as username FROM posts LEFT JOIN users ON posts.author_id=users.id";
+            $res = mysqli_query($link, $query);
+            
+            for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
+            ?>
         <section class="articles">
             <h2 class="section-title"><img class="icon" src="img/fire.png" alt=""> Популярные статьи</h2>
             <div class="articles-grid">
+                <?php 
+                    foreach ($data as $post): ?>
                 <article class="article-card">
+                <a href="/pages/post.php?id=<?= $post['id']?>" style="text-decoration: none;"></a>
                     <img src="img/image1.jfif" alt="Превью статьи">
                     <div class="article-info">
                         <div class="article-meta">
-                            <span class="author">Автор статьи</span>
+                            <span class="author"><?= $post['username']?></span>
                             <span class="views">👁️ 10,000</span>
-                            <span class="time">1 месяц назад</span>
+                            <span class="time"><?= timeAgo($post['created_at'])?></span>
                         </div>
-                        <h3 class="article-title">Заголовок статьи</h3>
-                        <p class="article-description">Разнообразный и богатый опыт реализация намеченных плановых заданий требуют...</p>
+                        <h3 class="article-title"><?= $post['header']?></h3>
+                        <p class="article-description"><?= mb_substr($post['text'], 0, 107)?>...</p>
                     </div>
                 </article>
+                <?php endforeach;
+                die(); ?>
         
                 <article class="article-card">
                     <img src="img/image2.jfif" alt="Превью статьи">

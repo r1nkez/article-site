@@ -1,4 +1,9 @@
 /* ОБЩИЕ СТИЛИ */
+
+html {
+    overflow-y: scroll;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -121,6 +126,18 @@ header {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
     position: relative; /* Добавляем для правильного отображения */
+}
+
+.article-card a {
+    position: absolute;
+    inset: 0; /* Растягивает ссылку на весь article */
+    z-index: 1; /* Поднимает ссылку выше контента */
+}
+
+.article-card a:visited,
+.article-card a {
+    color: inherit; /* Убирает цвет ссылки */
+    text-decoration: none; /* Убирает подчёркивание */
 }
 
 .article-card img {
@@ -266,6 +283,24 @@ header {
     box-shadow: 0 0 5px rgba(52, 72, 125, 0.3);
 }
 
+.login-form textarea {
+    padding: 13px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 16px;
+    width: 100%;
+    height: 150px; /* Задаем нормальную высоту */
+    resize: vertical; /* Позволяет пользователю менять размер только по вертикали */
+    outline: none;
+    transition: 0.3s;
+    margin-bottom: 15px;
+}
+
+.login-form textarea:focus {
+    border-color: #34487d;
+    box-shadow: 0 0 5px rgba(52, 72, 125, 0.3);
+}
+
 .button {
     background-color: #34487d;
     color: white;
@@ -279,8 +314,25 @@ header {
     margin-bottom: 20px; 
 }
 
+.button-delete {
+    background-color: #c22626;
+    color: white;
+    font-size: 16px;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+    margin-bottom: 20px; 
+}
+
 .button:hover {
     background-color: #2c3e6b;
+}
+
+.button-delete:hover {
+    background-color: #a52121;
 }
 
 .separator {
@@ -342,3 +394,258 @@ header {
     background-color: #a71d2a;
 }
 
+
+.profile-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+
+.h2-profile {
+    color: #364A75;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI';
+}
+
+.profile-card {
+    font-size: 18px;
+    color: #333;
+}
+
+.profile-form {
+    margin-top: 20px;
+}
+
+.profile-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.profile-button {
+    background-color: #364A75;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: 'Segoe UI';
+    font-weight: 500;
+}
+
+.profile-button:hover {
+    background-color: #2c3e6b;
+}
+
+.profile-logout-button {
+    margin-top: 10px;
+    background-color: #dc3545;
+}
+
+.profile-logout-button:hover {
+    background-color: #c82333;
+}
+
+.profile-links {
+    margin-top: 20px;
+}
+
+.profile-link-button, .profile-delete-button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 10px;    
+    font-family: 'Segoe UI';
+    font-weight: 500;
+}
+
+.profile-link-button {
+    background-color: #364A75;
+    color: white;
+}
+
+.profile-link-button:hover {
+    background-color: #2c3e6b;
+}
+
+.profile-delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.profile-delete-button:hover {
+    background-color: #b52020;
+}
+
+/* Страница статьи */
+.article-container-page {
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок статьи */
+.article-title-page {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Метаданные статьи */
+.article-meta-page {
+    font-size: 14px;
+    color: #666;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Автор и дата */
+.article-author-page {
+    font-weight: bold;
+    color: #364A75;
+}
+
+.article-time-page {
+    color: #888;
+}
+
+/* Контент статьи */
+.article-content-page {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* Изображение статьи */
+.article-image-page {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Ссылки внутри статьи */
+.article-content-page a {
+    color: #364A75;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.article-contentp-page a:hover {
+    color: #2c3e6b;
+}
+
+/* Кнопка назад */
+.back-button-page {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background: #364A75;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.back-button-page:hover {
+    background: #2c3e6b;
+}
+
+.admin-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-edit-form label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.admin-edit-form input,
+.admin-edit-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s ease-in-out;
+}
+
+.admin-edit-form input:focus,
+.admin-edit-form textarea:focus {
+    border-color: #364A75;
+    box-shadow: 0 0 5px rgba(52, 72, 125, 0.3);
+}
+
+.admin-edit-form textarea {
+    min-height: 200px; /* Удобная высота */
+    resize: vertical;  /* Можно растягивать */
+}
+
+.save-button {
+    background: #28a745;
+    color: white;
+    font-size: 16px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.save-button:hover {
+    background: #218838;
+}
+
+.cancel-button {
+    background: #dc3545;
+    color: white;
+    font-size: 16px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.cancel-button:hover {
+    background: #c82333;
+}
+
+.edit-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+}
