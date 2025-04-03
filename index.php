@@ -72,73 +72,7 @@
                     </div>
                 </article>
                 <?php endforeach;
-                die(); ?>
-        
-                <article class="article-card">
-                    <img src="img/image2.jfif" alt="Превью статьи">
-                    <div class="article-info">
-                        <div class="article-meta">
-                            <span class="author">Автор статьи</span>
-                            <span class="views">👁️ 10,000</span>
-                            <span class="time">1 месяц назад</span>
-                        </div>
-                        <h3 class="article-title">Заголовок статьи</h3>
-                        <p class="article-description">Разнообразный и богатый опыт реализация намеченных плановых заданий требуют...</p>
-                    </div>
-                </article>
-
-                <article class="article-card">
-                    <img src="img/image3.png" alt="Превью статьи">
-                    <div class="article-info">
-                        <div class="article-meta">
-                            <span class="author">Автор статьи</span>
-                            <span class="views">👁️ 10,000</span>
-                            <span class="time">1 месяц назад</span>
-                        </div>
-                        <h3 class="article-title">Заголовок статьи</h3>
-                        <p class="article-description">Разнообразный и богатый опыт реализация намеченных плановых заданий требуют...</p>
-                    </div>
-                </article>
-        
-                <article class="article-card">
-                    <img src="img/image4.jfif" alt="Превью статьи">
-                    <div class="article-info">
-                        <div class="article-meta">
-                            <span class="author">Автор статьи</span>
-                            <span class="views">👁️ 10,000</span>
-                            <span class="time">1 месяц назад</span>
-                        </div>
-                        <h3 class="article-title">Заголовок статьи</h3>
-                        <p class="article-description">Разнообразный и богатый опыт реализация намеченных плановых заданий требуют...</p>
-                    </div>
-                </article>
-        
-                <article class="article-card">
-                    <img src="img/image5.jpeg" alt="Превью статьи">
-                    <div class="article-info">
-                        <div class="article-meta">
-                            <span class="author">Автор статьи</span>
-                            <span class="views">👁️ 10,000</span>
-                            <span class="time">1 месяц назад</span>
-                        </div>
-                        <h3 class="article-title">Заголовок статьи</h3>
-                        <p class="article-description">Разнообразный и богатый опыт реализация намеченных плановых заданий требуют...</p>
-                    </div>
-                </article>
-
-                <article class="article-card">
-                    <img src="img/image6.jfif" alt="Превью статьи">
-                    <div class="article-info">
-                        <div class="article-meta">
-                            <span class="author">Автор статьи</span>
-                            <span class="views">👁️ 10,000</span>
-                            <span class="time">1 месяц назад</span>
-                        </div>
-                        <h3 class="article-title">Заголовок статьи</h3>
-                        <p class="article-description">Разнообразный и богатый опыт реализация намеченных плановых заданий требуют...</p>
-                    </div>
-                </article>
-            </div>
+                 ?>
         </section>
         <section class="news">
             <h2 class="section-title-news">

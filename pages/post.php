@@ -51,7 +51,11 @@
                     <textarea id="text" name="text" required><?= htmlspecialchars($post['text']) ?></textarea>
 
                     <button type="submit" class="save-button">Сохранить изменения</button>
-                    <a href="/index.php" class="back-button-page">← Назад</a>
+                </form>
+                <a href="/index.php" class="back-button-page">← Назад</a>
+                <form action="/php/deletePost.php" method="post" class="admin-edit-form" onsubmit="return confirm('Вы уверены, что удалить пост?');">
+                    <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
+                    <button type="submit" class="save-button">Удалить</button>
                 </form>
             </div>
         <?php else: ?>
