@@ -48,19 +48,19 @@
             $header = $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
             require $header; 
             
-            $query = "SELECT posts.id, posts.header, posts.text, posts.created_at, users.name as username FROM posts LEFT JOIN users ON posts.author_id=users.id";
+            $query = "SELECT posts.id, posts.header, posts.text, posts.created_at, posts.img as img_name, users.name as username FROM posts LEFT JOIN users ON posts.author_id=users.id";
             $res = mysqli_query($link, $query);
             
             for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
             ?>
         <section class="articles">
-            <h2 class="section-title"><img class="icon" src="img/fire.png" alt=""> Популярные статьи</h2>
+            <h2 class="section-title"><img class="icon" src="/img/fire.png" alt=""> Популярные статьи</h2>
             <div class="articles-grid">
                 <?php 
                     foreach ($data as $post): ?>
                 <article class="article-card">
                 <a href="/pages/post.php?id=<?= $post['id']?>" style="text-decoration: none;"></a>
-                    <img src="img/image1.jfif" alt="Превью статьи">
+                    <img src="/uploads/<?= $post['img_name']?>" alt="Превью статьи">
                     <div class="article-info">
                         <div class="article-meta">
                             <span class="author"><?= $post['username']?></span>

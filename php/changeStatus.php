@@ -11,7 +11,7 @@
             $status = $_POST['status'];
             $query = "UPDATE users SET status='$status' WHERE id='$id'";
             mysqli_query($link, $query);
-            header('Location: ../pages/admin.php');
+            header('Location: /admin/users.php');
             die();
         } 
     } else {

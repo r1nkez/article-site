@@ -13,7 +13,7 @@
                 $query = "DELETE FROM users WHERE id='$id'";
                 mysqli_query($link, $query);
                 
-                header('Location: ../pages/admin.php');
+                header('Location: /admin/users.php');
                 die();
             }
         }

@@ -16,9 +16,45 @@
             $header = clean_input($_POST['header']);
             $text = clean_input($_POST['text']);
 
-            $id = $_SESSION['id'];
+            if (empty($header) || empty($text)) {
+                die("Ошибка: Заполните все поля!");
+            }
+
+            $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
+
+            if (!empty($_FILES['file']['name'])) {
             
-            $query = "INSERT INTO posts (header, text, author_id, created_at) VALUES ('$header', '$text', '$id', NOW())";
+                $allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+                $maxSize = 5 * 1024 * 1024;
+
+                $fileTmpPath = $_FILES["file"]["tmp_name"];
+                $fileName = basename($_FILES["file"]["name"]);
+                $fileSize = $_FILES["file"]["size"];
+                $fileType = mime_content_type($fileTmpPath);
+
+                if (!in_array($fileType, $allowedTypes)) {
+                    die("Ошибка: Неверный формат файла.");
+                }
+        
+                if ($fileSize > $maxSize) {
+                    die("Ошибка: Файл слишком большой.");
+                }
+        
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+
+                $newFileName = uniqid("img_") . "." . pathinfo($fileName, PATHINFO_EXTENSION);
+                $uploadedFile = $uploadDir . $newFileName;
+
+                if (!move_uploaded_file($fileTmpPath, $uploadedFile)) {
+                    die("Ошибка при загрузке изображения.");
+                }
+            }
+
+            $author_id = $_SESSION['id'];
+            
+            $query = "INSERT INTO posts (header, text, author_id, created_at, img) VALUES ('$header', '$text', $author_id, NOW(), '$newFileName')";
 
             mysqli_query($link, $query);
             header('Location: /index.php');
@@ -34,13 +70,16 @@
                     
             <?php endif; ?>
 		<h2 class="login-title">Добавить статью</h2>
-		<form action="" method="post" class="login-form">
+		<form action="" method="post" class="login-form" enctype="multipart/form-data">
 			
 			<label for="header">Заголовок статьи</label>
 			<input type="text" name="header" id="header" required>
-	
+
+            <label for="file">Выберите изображение:</label>
+            <input type="file" name="file" id="file" accept="image/*" required>
+
 			<label for="text">Текст статьи</label>
-            <textarea name="text"></textarea>
+            <textarea name="text" required></textarea>
 	
 			<button type="submit" class="button">Опубликовать</button>
 		</form>
