@@ -71,12 +71,11 @@
                         <p class="article-description"><?= mb_substr($post['text'], 0, 107)?>...</p>
                     </div>
                 </article>
-                <?php endforeach;
-                 ?>
+                <?php endforeach; ?>
         </section>
         <section class="news">
             <h2 class="section-title-news">
-                <img class="icon" src="img/news.png" alt=""> Новости
+                <img class="icon" src="/img/news.png" alt=""> Новости
             </h2>
             <ul class="news-list">
                 <li>Платформа ArtSport будет автоматически выявлять использование чужой ЭЦП</li>

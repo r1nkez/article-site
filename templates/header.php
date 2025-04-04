@@ -3,9 +3,9 @@
         <div class="logo">ЛОГО</div>
         <ul class="top-menu">
             <li><a href="/index.php">Главная</a></li>
-            <li><a href="#">Статьи</a></li>
-            <li><a href="#">Новости</a></li>
-            <li><a href="#">Контакты</a></li>
+            <li><a href="/pages/posts.php">Статьи</a></li>
+            <li><a href="/pages/news.php">Новости</a></li>
+            <li><a href="/pages/contacts.php">Контакты</a></li>
         </ul>
         <div class="user-buttons">
             <?php if (!empty($_SESSION['auth']) && !empty($_SESSION['status']) && $_SESSION['status'] === 'admin'): ?>
