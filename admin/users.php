@@ -3,19 +3,25 @@
     require $connect;
     $head = $_SERVER['DOCUMENT_ROOT'] . '/templates/head.html';
     require $head;
+    $mysqli = getDbConnection();
 
     if (!empty($_SESSION['auth'])) {
         $id = $_SESSION['id'];
-        $query = "SELECT status FROM users WHERE id='$id'";
-        $res = mysqli_query($link, $query);
+        $stmt = $mysqli->prepare("SELECT status FROM users WHERE id = ?");
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        
+        // $query = "SELECT status FROM users WHERE id='$id'";
+        // $res = mysqli_query($link, $query);
         $user = mysqli_fetch_assoc($res);
 
         $_SESSION['status'] = $user['status'];
     }
 
-    if (isset($_SESSION['auth'], $_SESSION['status']) && $_SESSION['auth'] && $_SESSION['status'] === 'admin'): 
+    if (isset($_SESSION['auth'], $_SESSION['status']) && $_SESSION['auth'] && $_SESSION['status'] === 'admin'):
         $query = "SELECT id, login, status FROM users";
-        $res = mysqli_query($link, $query);
+        $res = $mysqli->query($query);
         for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
     ?>
 

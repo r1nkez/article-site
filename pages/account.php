@@ -1,6 +1,7 @@
 <?php
     $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
     require $connect;
+    $mysqli = getDbConnection();
 
     if (!empty($_SESSION['id'])) {
         
@@ -10,9 +11,13 @@
         require $header;
        
         $id = $_SESSION['id'];
-        $query = "SELECT * FROM users WHERE id='$id'";
-        $res = mysqli_query($link, $query);
-        $user = mysqli_fetch_assoc($res);
+        $stmt = $mysqli->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        // $query = "SELECT * FROM users WHERE id='$id'";
+        // $res = mysqli_query($link, $query);
+        $user = $res->fetch_assoc();
         $birthDate = DateTime::createFromFormat('Y-m-d', $user['birthday']);
         $now = new DateTime();
         $age = $now->diff($birthDate)->y;
@@ -28,8 +33,12 @@
         if (!empty($user)): 
             if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 $name = $_POST['name'];
-                $query = "UPDATE users SET name='$name' WHERE id='$id'";
-                mysqli_query($link, $query);
+                
+                $stmt = $mysqli->prepare("UPDATE users SET name = ? WHERE id = ?");
+                $stmt->bind_param('si', $name, $id);
+                $stmt->execute();
+                // $query = "UPDATE users SET name='$name' WHERE id='$id'";
+                // mysqli_query($link, $query);
                 header('Location: account.php');
                 die();
             }

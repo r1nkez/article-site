@@ -4,16 +4,19 @@
     require $connect;
     $head = $_SERVER['DOCUMENT_ROOT'] . '/templates/head.html';
     require $head;
-    
+    $mysqli = getDbConnection();
     if (!empty($_SESSION['id'])) {
-
+        
         $id = $_SESSION['id'];
-        $query = "SELECT * FROM users WHERE id='$id'";
+        $stmt = $mysqli->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        // $query = "SELECT * FROM users WHERE id='$id'";
 
-        $res = mysqli_query($link, $query);
-        $user = mysqli_fetch_assoc($res);
+        $res = $stmt->get_result();
+        $user = $res->fetch_assoc();
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $hash = $user['password'];
             $oldPassword = $_POST['old_password'];
             $newPassword = $_POST['new_password'];
@@ -22,8 +25,11 @@
             if (password_verify($oldPassword, $hash)) {
                 if ($newPassword === $newPasswordConfirm) {
                     $newHash = password_hash($newPassword, PASSWORD_BCRYPT);
-                    $query = "UPDATE users SET password='$newHash' WHERE id='$id'";
-                    mysqli_query($link, $query);
+                    $stmt = $mysqli->prepare("UPDATE users SET password = ? WHERE id = ?");
+                    $stmt->bind_param("si", $newHash, $id);
+                    $stmt->execute();
+                    // $query = "UPDATE users SET password='$newHash' WHERE id='$id'";
+                    // mysqli_query($link, $query);
                     $_SESSION['flash'] = 'Ваш пароль успешно изменен';
                     header('Location: /index.php');
                     die();

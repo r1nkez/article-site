@@ -4,6 +4,7 @@
 	require $connect;
 	$head = $_SERVER['DOCUMENT_ROOT'] . '/templates/head.html';
     require $head;
+	$mysqli = getDbConnection();
 
 	if (!empty($_SESSION['auth'])) {
 		$_SESSION['flash'] = 'Вы уже авторизованы';
@@ -19,10 +20,12 @@
 		if (!empty($_POST['login']) && !empty($_POST['password'])) {
 			$password = $_POST['password'];
 			$login = $_POST['login'];
-				
-			$query = "SELECT * FROM users WHERE login='$login'";
-			$res = mysqli_query($link, $query);
-			$user = mysqli_fetch_assoc($res);
+			
+			$stmt = $mysqli->prepare("SELECT * FROM users WHERE login = ?");
+			$stmt->bind_param("s", $login);
+			$stmt->execute();
+			$res = $stmt->get_result();
+			$user = $res->fetch_assoc();
 	
 			if 	(!empty($user) && password_verify($_POST['password'], $user['password'])) {
 				$_SESSION['auth'] = true;

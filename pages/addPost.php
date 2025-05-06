@@ -5,6 +5,7 @@
     require $head;
     $header = $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
     require $header;
+    $mysqli = getDbConnection();
 
     function clean_input($data) {
         return htmlspecialchars(trim($data));
@@ -54,9 +55,12 @@
 
             $author_id = $_SESSION['id'];
             
-            $query = "INSERT INTO posts (header, text, author_id, created_at, img) VALUES ('$header', '$text', $author_id, NOW(), '$newFileName')";
+            $stmt = $mysqli->prepare("INSERT INTO posts (header, text, author_id, created_at, img) VALUES (?, ?, ?, NOW(), ?)");
+            // $query = "INSERT INTO posts (header, text, author_id, created_at, img) VALUES ('$header', '$text', $author_id, NOW(), '$newFileName')";
+            $stmt->bind_param("ssis", $header, $text, $author_id, $newFileName);
+            $stmt->execute();
 
-            mysqli_query($link, $query);
+            // mysqli_query($link, $query);
             header('Location: /index.php');
             die();
         }

@@ -3,6 +3,7 @@
     require $connect;
     $head = $_SERVER['DOCUMENT_ROOT'] . '/templates/head.html';
     require $head;
+    $mysqli = getDbConnection();
 
     if (!empty($_SESSION['auth'])) {
 		$_SESSION['flash'] = 'Вы уже авторизованы';
@@ -55,18 +56,26 @@
         }
 
         if (empty($errors)) {
-            $query = "SELECT * FROM users WHERE login='$login'";
-            $user = mysqli_fetch_assoc(mysqli_query($link, $query));
+            $stmt = $mysqli->prepare("SELECT * FROM users WHERE login = ?");
+            $stmt->bind_param("s", $login);
+            $stmt->execute();
+            // $query = "SELECT * FROM users WHERE login='$login'";
+            $res = $stmt->get_result();
+            $user = $res->fetch_assoc();
 
             if (empty($user)) {
                 $date = date('Y-m-d');
                 $password = password_hash($password, PASSWORD_BCRYPT);
 
-                $query = "INSERT INTO users (login, password, registration_date, email, birthday, status) 
-                        VALUES ('$login', '$password', '$date', '$email', '$birthday', 'user')";
-                mysqli_query($link, $query);
+                $stmt = $mysqli->prepare("INSERT INTO users (login, password, registration_date, email, birthday, status) 
+                        VALUES (?, ?, ?, ?, ?, 'user')");
+                $stmt->bind_param("sssss", $login, $password, $date, $email, $birthday);
+                $stmt->execute();
+                // $query = "INSERT INTO users (login, password, registration_date, email, birthday, status) 
+                //         VALUES ('$login', '$password', '$date', '$email', '$birthday', 'user')";
+                // mysqli_query($link, $query);
 
-                $id = mysqli_insert_id($link);
+                $id = $mysqli->insert_id;
                 $_SESSION['auth'] = true;
                 $_SESSION['id'] = $id;
                 $_SESSION['login'] = $login;

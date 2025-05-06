@@ -4,6 +4,7 @@
     require $connect;
     $head = $_SERVER['DOCUMENT_ROOT'] . '/templates/head.html';
     require $head;
+    $mysqli = getDbConnection();
     
     if (empty($_SESSION['auth'])) {
         http_response_code(401);
@@ -11,15 +12,21 @@
     }
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = $_SESSION['id'];
-        $query = "SELECT * FROM users WHERE id='$id'";
-        $res = mysqli_query($link, $query);
-        $user = mysqli_fetch_assoc($res);
+        $stmt = $mysqli->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        // $query = "SELECT * FROM users WHERE id='$id'";
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $user = $res->fetch_assoc();
 
         $hash = $user['password'];
         
         if (password_verify($_POST['password'], $hash)) {
-            $query = "DELETE FROM users WHERE id='$id'";
-            mysqli_query($link, $query);
+            $stmt = $mysqli->prepare("DELETE FROM users WHERE id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            // $query = "DELETE FROM users WHERE id='$id'";
+            // mysqli_query($link, $query);
             $_SESSION = [];
             session_destroy();
             header('Location: /index.php');

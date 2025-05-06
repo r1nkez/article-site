@@ -4,6 +4,7 @@
     require $connect;
     $head = $_SERVER['DOCUMENT_ROOT'] . '/templates/head.html';
     require $head;
+    $mysqli = getDbConnection();
      ?>
 
 <body>
@@ -50,7 +51,7 @@
         require $header; 
         
         $query = "SELECT posts.id, posts.header, posts.text, posts.created_at, posts.img as img_name, users.name as username FROM posts LEFT JOIN users ON posts.author_id=users.id";
-        $res = mysqli_query($link, $query);
+        $res = $mysqli->query($query);
         
         for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row); ?>
 

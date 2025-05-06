@@ -12,13 +12,20 @@
     require $head;
     $header = $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
     require $header;
+    $mysqli = getDbConnection();
 
 
     $id = htmlspecialchars($_GET['id']);
-    $query = "SELECT posts.id, posts.header, posts.text, posts.img as img_name, posts.created_at, users.name as username FROM posts LEFT JOIN users ON posts.author_id=users.id WHERE posts.id=$id";
     
-    $res = mysqli_query($link, $query);
-    $post = mysqli_fetch_assoc($res);
+    $stmt = $mysqli->prepare("SELECT posts.id, posts.header, posts.text, posts.img as img_name, posts.created_at, users.name as username FROM posts LEFT JOIN users ON posts.author_id=users.id WHERE posts.id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $res = $stmt->get_result();
+
+    // $query = "SELECT posts.id, posts.header, posts.text, posts.img as img_name, posts.created_at, users.name as username FROM posts LEFT JOIN users ON posts.author_id=users.id WHERE posts.id=$id";
+    
+    // $res = mysqli_query($link, $query);
+    $post = $res->fetch_assoc();
     
 
     if (!$post) {
@@ -32,6 +39,10 @@
                 $header_post = $_POST['header'];
                 $text = $_POST['text'];
                 $update_id = $_POST['id'];
+                
+                $stmt = $mysqli->prepare("UPDATE posts SET header = ?, text = ? WHERE id = ?");
+                $stmt->bind_param("ssi", $header_post, $text, $id);
+
                 $query_update = "UPDATE posts SET header='$header_post', text='$text' WHERE id=$id";
                 mysqli_query($link, $query_update);
                 header("Location: /pages/post.php?id=$update_id");
