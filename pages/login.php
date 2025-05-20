@@ -28,9 +28,10 @@
 			$user = $res->fetch_assoc();
 	
 			if 	(!empty($user) && password_verify($_POST['password'], $user['password'])) {
+				session_regenerate_id(true);
+                unset($_SESSION['flash']);
 				$_SESSION['auth'] = true;
 				$_SESSION['id'] = $user['id'];
-				$_SESSION['flash'] = 'Авторизация прошла успешно </br>';
 				$_SESSION['login'] = $login;
 				$_SESSION['status'] = $user['status'];
 				 

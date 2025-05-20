@@ -7,8 +7,8 @@
 	$pass = '';
 	$name = 'mydb';
 	
-	$link = mysqli_connect($host, $user, $pass, $name);
-	mysqli_set_charset($link, 'utf8');
+	// $link = mysqli_connect($host, $user, $pass, $name);
+	// mysqli_set_charset($link, 'utf8');
 
 
 	function getDbConnection() {

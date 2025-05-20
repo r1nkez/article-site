@@ -30,6 +30,7 @@
                     $stmt->execute();
                     // $query = "UPDATE users SET password='$newHash' WHERE id='$id'";
                     // mysqli_query($link, $query);
+                    session_regenerate_id(true);
                     $_SESSION['flash'] = 'Ваш пароль успешно изменен';
                     header('Location: /index.php');
                     die();

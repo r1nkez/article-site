@@ -13,6 +13,8 @@
     $header = $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
     require $header;
     $mysqli = getDbConnection();
+    echo "<pre>";
+    var_dump($_SESSION);
 
 
     $id = htmlspecialchars($_GET['id']);
@@ -42,9 +44,10 @@
                 
                 $stmt = $mysqli->prepare("UPDATE posts SET header = ?, text = ? WHERE id = ?");
                 $stmt->bind_param("ssi", $header_post, $text, $id);
+                $stmt->execute();
 
-                $query_update = "UPDATE posts SET header='$header_post', text='$text' WHERE id=$id";
-                mysqli_query($link, $query_update);
+                // $query_update = "UPDATE posts SET header='$header_post', text='$text' WHERE id=$id";
+                // mysqli_query($link, $query_update);
                 header("Location: /pages/post.php?id=$update_id");
                 die();
             }
@@ -84,6 +87,19 @@
                 </div>
                 <a href="/index.php" class="back-button-page">← Назад</a>
             </div>
+            <div class="edit-container">
+
+                <h1 class="article-title-page">Комментарии</h1>
+                <form action="/php/addComment.php" method="post" class="admin-edit-form">
+                    <input type="hidden" name="post_id" value="<?= $post['id']?>">
+                    <textarea type="text" name="comment" class="admin-edit-form" placeholder="Оставить комментарий"></textarea>
+
+                    <button type="submit" class="save-button">Отправить</button>
+
+                </form>
+                
+            </div>
+            
         <?php endif; ?>
     
         

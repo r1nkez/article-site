@@ -20,10 +20,13 @@
                     unlink($imgPath);
                 }
             }
+            
+            $stmt = $mysqli->prepare("DELETE FROM posts WHERE id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            // $query_del = "DELETE FROM posts WHERE id=$id";
 
-            $query_del = "DELETE FROM posts WHERE id=$id";
-
-            mysqli_query($link, $query_del);
+            // mysqli_query($link, $query_del);
 
             header('Location: /index.php');
             die();

@@ -74,7 +74,8 @@
                 // $query = "INSERT INTO users (login, password, registration_date, email, birthday, status) 
                 //         VALUES ('$login', '$password', '$date', '$email', '$birthday', 'user')";
                 // mysqli_query($link, $query);
-
+                session_regenerate_id(true);
+                unset($_SESSION['flash']);
                 $id = $mysqli->insert_id;
                 $_SESSION['auth'] = true;
                 $_SESSION['id'] = $id;
