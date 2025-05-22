@@ -649,3 +649,62 @@ header {
     max-width: 800px;
     margin: 20px auto;
 }
+
+
+.comments-section {
+    width: 90%;
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+.comment-card {
+    background: #f4f4f4;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.comment-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #364A75;
+}
+
+.comment-date {
+    font-style: italic;
+}
+
+.comment-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.no-comments {
+    text-align: center;
+    font-size: 16px;
+    color: #888;
+    margin-top: 20px;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    min-height: 100px;
+    resize: vertical;
+}
+
+.span-admin {
+    color: red;
+}
