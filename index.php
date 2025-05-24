@@ -1,27 +1,20 @@
 <?php
 
     $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
-    require $connect;
+    require_once $connect;
+
+    $updateStatus = $_SERVER['DOCUMENT_ROOT'] . '/php/updateStatus.php';
+    require_once $updateStatus;
 
     $mysqli = getDbConnection();
 
-
     if (!empty($_SESSION['auth'])) {
         $id = $_SESSION['id'];
-        $stmt = $mysqli->prepare("SELECT status FROM users WHERE id = ?");
-        $stmt->bind_param("s", $id);
-        $stmt->execute();
-        $res = $stmt->get_result();
-        
-        // $query = "SELECT status FROM users WHERE id='$id'";
-        // $res = mysqli_query($link, $query);
-        $user = mysqli_fetch_assoc($res);
-
-        $_SESSION['status'] = $user['status'];
+        updateStatus($id, $mysqli);
     }
 
     $head = $_SERVER['DOCUMENT_ROOT'] . '/templates/head.html';
-    require $head;
+    require_once $head;
     date_default_timezone_set('Etc/GMT-5');
     ?>
 
@@ -66,7 +59,7 @@
             }
             
             $header = $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
-            require $header;
+            require_once $header;
             $query = "SELECT posts.id, posts.header, posts.text, posts.created_at, posts.img as img_name, users.name as username FROM posts LEFT JOIN users ON posts.author_id=users.id";
             $res = $mysqli->query($query);
             

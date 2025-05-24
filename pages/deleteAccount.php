@@ -1,9 +1,9 @@
 <?php 
 
     $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
-    require $connect;
+    require_once $connect;
     $head = $_SERVER['DOCUMENT_ROOT'] . '/templates/head.html';
-    require $head;
+    require_once $head;
     $mysqli = getDbConnection();
     
     if (empty($_SESSION['auth'])) {

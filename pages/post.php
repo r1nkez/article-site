@@ -7,11 +7,11 @@
 
 
     $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
-    require $connect;
+    require_once $connect;
     $head = $_SERVER['DOCUMENT_ROOT'] . '/templates/head.html';
-    require $head;
+    require_once $head;
     $header = $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
-    require $header;
+    require_once $header;
     $mysqli = getDbConnection();
     // echo "<pre>";
     // var_dump($_SESSION);

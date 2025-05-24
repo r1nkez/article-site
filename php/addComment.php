@@ -1,6 +1,6 @@
     <?php
         $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
-        require $connect;
+        require_once $connect;
         $mysqli = getDbConnection();
         
         if ($_SERVER['REQUEST_METHOD'] === "POST") {

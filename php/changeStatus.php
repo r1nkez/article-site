@@ -1,6 +1,6 @@
 <?php
     $connect = $_SERVER['DOCUMENT_ROOT'] . '/php/connect.php';
-    require $connect;
+    require_once $connect;
     $mysqli = getDbConnection();
 
     if (isset($_SESSION['auth'], $_SESSION['status']) && $_SESSION['auth'] && $_SESSION['status'] === 'admin') {
